@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "multiboot2.h": "c",
+        "stddef.h": "c",
+        "stdint.h": "c",
+        "tty.h": "c"
+    }
+}

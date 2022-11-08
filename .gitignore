@@ -1,0 +1,7 @@
+*.a
+*.d
+*.iso
+*.local.*
+*.o
+*.socket
+/sysroot
