@@ -72,9 +72,9 @@ lib/%.c.o:
 	$(CC) $(lib_GLOBAL_CFLAGS) $(lib_$*_CFLAGS) $(@D)/$*.c -c -o $@
 
 clean:
-	$(RM) $(kernel_OBJECTS) $(lib_OBJECTS)
+	rm $(kernel_OBJECTS) $(lib_OBJECTS)
 
 mrproper: clean
-	$(RM) $(kernel_OUT) $(lib_LIB) $(DEPENDENCIES)
+	rm $(kernel_OUT) $(lib_LIB) $(DEPENDENCIES)
 
 -include $(DEPENDENCIES)
