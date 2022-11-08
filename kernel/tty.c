@@ -139,6 +139,7 @@ void terminal_putchar(unsigned char c)
 
 void terminal_write(const char *s)
 {
-    for (size_t i = 0; i < strlen(s); ++i)
+    for (size_t i = 0; i < strlen(s); ++i) {
         terminal_putchar(s[i]);
+    }
 }
