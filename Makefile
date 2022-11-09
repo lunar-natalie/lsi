@@ -63,7 +63,7 @@ $(lib_LIB): $(lib_OBJECTS)
 	$(AR) $(lib_ARFLAGS) $@ $^
 
 kernel/%.c.o:
-	$(CC) $(kernel_GLOBAL_CFLAGS) $(kernel_$*_CFLAGS) kernel/$*.c -c -o $@
+	$(CC) $(kernel_GLOBAL_CFLAGS) $(kernel_$*_CFLAGS) $(@D)/$*.c -c -o $@
 
 $(ARCHDIR)/kernel/%.c.o:
 	$(CC) $(kernel_GLOBAL_CFLAGS) $(kernel_$(TARGET_ARCH)_$*_CFLAGS) $(@D)/$*.c -c -o $@
