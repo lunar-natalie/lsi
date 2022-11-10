@@ -27,11 +27,11 @@ kernel_LINKERSCRIPT = $(ARCHDIR)/kernel/$(kernel_$(ARCH)_LINKERSCRIPT)
 kernel_OUT = $(SYSROOT)/boot/$(kernel_BIN)
 
 kernel_ALL_CFLAGS = $(CFLAGS) $(kernel_CFLAGS) $(kernel_$(ARCH)_CFLAGS) \
-					$(CPPFLAGS) $(kernel_CPPFLAGS) $(kernel_$(ARCH)_CPPFLAGS)
+		$(CPPFLAGS) $(kernel_CPPFLAGS) $(kernel_$(ARCH)_CPPFLAGS)
 
 kernel_AUX_LDFLAGS = -T$(kernel_LINKERSCRIPT) $(kernel_LIBS:%=-l%)
 kernel_ALL_LDFLAGS = $(LDFLAGS) $(kernel_LDFLAGS) $(kernel_AUX_LDFLAGS) \
-					 $(kernel_$(ARCH)_LDFLAGS)
+		$(kernel_$(ARCH)_LDFLAGS)
 
 DEPENDENCIES += $(kernel_GLOBAL_OBJECTS:%.o=%.d) $(kernel_ARCH_OBJECTS:%.o=%.d)
 
@@ -44,7 +44,7 @@ $(SYSROOT):
 	cp -R include/* $(ARCHDIR)/include/* $(SYSROOT)/include
 
 $(kernel_OUT): $(kernel_GLOBAL_OBJECTS) $(kernel_ARCH_OBJECTS) \
-			   $(kernel_ARCHIVES)
+		$(kernel_ARCHIVES)
 	@echo ' LD' $@
 	@$(LD) $(kernel_ALL_LDFLAGS) $(kernel_GLOBAL_OBJECTS) \
 		$(kernel_ARCH_OBJECTS) -o $@
