@@ -17,11 +17,11 @@ unset CPPFLAGS
 unset LDFLAGS
 unset QEMU_USE_GDB
 unset TARGET
-unset TARGET_ARCH
-unset TARGET_MACH
+unset ARCH
+unset MACH
 AR="llvm-ar"
 CC="clang"
-CFLAGS="-O2 -g -std=c17"
+CFLAGS="-O2 -MMD -g -std=c17"
 CONFIG_MK=".local.mk"
 CONFIG_SH=".local.sh"
 DISK_IMAGE="lsi.iso"
@@ -30,21 +30,21 @@ SYSROOT=
 
 MK_ENVNAMES="\
 AR
+ARCH
 CC
 CFLAGS
 CPPFLAGS
 LD
 LDFLAGS
+MACH
 SYSROOT
-TARGET
-TARGET_ARCH
-TARGET_MACH"
+TARGET"
 
 SH_ENVNAMES="\
 DISK_IMAGE
+MACH
 QEMU_USE_GDB
-SYSROOT
-TARGET_MACH"
+SYSROOT"
 
 HELP="Configuration utility for the LSI build system.
 
@@ -206,17 +206,17 @@ done
 if [ -n "$TARGET" ]
 then
     CFLAGS="$CFLAGS -target $TARGET"
-    TARGET_MACH=$(echo "$TARGET" | cut -d'-' -f1)
+    MACH=$(echo "$TARGET" | cut -d'-' -f1)
 else
-    TARGET_MACH=$(uname -m)
+    MACH=$(uname -m)
 fi
 
-case "$TARGET_MACH" in
+case "$MACH" in
     "x86"*)
-        TARGET_ARCH="i386"
+        ARCH="i386"
         ;;
     *)
-        TARGET_ARCH="$TARGET_MACH"
+        ARCH="$MACH"
         ;;
 esac
 

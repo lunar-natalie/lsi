@@ -12,7 +12,7 @@
 . ./.local.sh
 . ./util.sh
 
-QEMU="qemu-system-$TARGET_MACH"
+QEMU="qemu-system-$MACH"
 QEMU_BASE_OPTIONS="-cdrom $DISK_IMAGE"
 
 if ! is_set QEMU_USE_GDB

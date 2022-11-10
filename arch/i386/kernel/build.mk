@@ -10,8 +10,8 @@ kernel_i386_CFLAGS =
 kernel_i386_CPPFLAGS =
 kernel_i386_LDFLAGS =
 
-kernel_i386_SOURCES = \
-boot.c
+kernel_i386_OBJECTS = \
+boot.o
 
 kernel_i386_boot_CFLAGS = -O0 -fomit-frame-pointer
 

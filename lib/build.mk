@@ -10,7 +10,7 @@ lib_CFLAGS = -ffreestanding -Wall -Wextra
 lib_CPPFLAGS = -D__is_libk
 lib_ARFLAGS = -rcs
 
-lib_SOURCES = \
-string.c
+lib_OBJECTS = \
+string.o
 
-lib_LIB = libk.a
+lib_ARCHIVE = libk.a
