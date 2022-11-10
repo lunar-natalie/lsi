@@ -55,7 +55,6 @@ Configurations:
     [Debugging from emulation script](#emulation-and-debugging) enabled.
 
     Command line:
-
     ```shell
     ./configure.sh --target=i386-pc-none-elf --sysroot=sysroot --qemu-gdb
     ```
@@ -115,7 +114,6 @@ support is enabled.
 * Lines should be no longer than 80 characters, unless readability or
   functionality is significantly affected.
 * Each source file should begin with a comment formatted as follows:
-
   ```
   <filename>
 
@@ -125,9 +123,10 @@ support is enabled.
 
   SPDX-License-Identifier: <identifier>
   ```
-* Code should fit the conditions specified in `.clang-format` (see the
+* Code should fit the conditions specified in `.editorconfig` and
+  `.clang-format` (see the
   [ClangFormat documentation](https://clang.llvm.org/docs/ClangFormat.html) for
-  more information) and `.editorconfig`.
+  more information).
 
 ## Roadmap
 The long term goal of the LSI kernel is to provide the most common UNIX-like
