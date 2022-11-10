@@ -17,11 +17,15 @@ UNIX-like kernel.
         * [Requirements](#requirements-2)
         * [Command line](#command-line-2)
     * [Structure](#structure)
+    * [Coding style](#coding-style)
     * [Roadmap](#roadmap)
     * [License](#license)
 
 ## Documentation
-TODO
+* Documentation and code is written in United States English for integration
+  with other programs.
+* Shell commands to be run as user are denoted by shell code blocks.
+* 'sysroot' refers to the target installation directory.
 
 ## Build environment
 ### Requirements
@@ -41,16 +45,17 @@ testing from the build environment. See output of `./configure.sh --help` for
 all available options.
 
 Configurations:
-* Testing
+* Testing:
   * Host: Arch Linux
 
     Target: PC with i386 architecture
 
-    Sysroot: `./sysroot`
+    sysroot: `./sysroot`
 
-    [Debugging from emulation script](#emulation-and-debugging) enabled
+    [Debugging from emulation script](#emulation-and-debugging) enabled.
 
     Command line:
+
     ```shell
     ./configure.sh --target=i386-pc-none-elf --sysroot=sysroot --qemu-gdb
     ```
@@ -84,12 +89,50 @@ Debugging:
 ```shell
 ./qemu.sh
 ```
+Emulates the created disk image in [QEMU](https://www.qemu.org/); starts
+[GDB](https://sourceware.org/gdb/) and connects the process to QEMU if debugging
+support is enabled.
 
 ## Structure
-TODO
+* Each module is built by the root `Makefile` and contains a `build.mk` included
+  by the root Makefile with a build configuration relative to the directory of
+  the module.
+* The `kernel` module consists of all code internal to the kernel iteself.
+* The `lib` module consists of code for `libk` - the library containing
+  freestanding code used by kernel components.
+* Architecture-specific code is placed in `arch/<arch>/<module>`, where `<arch>`
+  is the target architecture and `<module>` is the module to which code and
+  configuration will be added. Modules are configured to use
+  architecture-specific objects with `arch/<arch>/<module>/build.mk`.
+* Headers accessible by all modules are located in `include` and will be copied
+  to the sysroot in the build process.
+    * Architecture-specific headers are located in `arch/<arch>/include`; only
+      headers specific to the configured target architecture will be accessible
+      from modules and copied to the sysroot.
+* `image` contains files for the creation of the bootable disk image.
+
+## Coding style
+* Lines should be no longer than 80 characters, unless readability or
+  functionality is significantly affected.
+* Each source file should begin with a comment formatted as follows:
+
+  ```
+  <filename>
+
+  <description>
+
+  Copyright (c) <year> <authors>.
+
+  SPDX-License-Identifier: <identifier>
+  ```
+* Code should fit the conditions specified in `.clang-format` (see the
+  [ClangFormat documentation](https://clang.llvm.org/docs/ClangFormat.html) for
+  more information) and `.editorconfig`.
 
 ## Roadmap
-TODO
+The long term goal of the LSI kernel is to provide the most common UNIX-like
+interfaces and syscalls to support an external libc. In the short term, the
+focus of the kernel is to implement basic I/O functionality on x86.
 
 ## License
 Copyright (c) 2022 The LSI Authors.
