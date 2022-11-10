@@ -4,28 +4,27 @@ UNIX-like kernel.
 
 ## Table of contents
 * [Lunar System Interface kernel](#lunar-system-interface-kernel)
-    * [Table of contents](#table-of-contents)
-    * [Documentation](#documentation)
-    * [Build environment](#build-environment)
-        * [Requirements](#requirements)
-        * [Configuration](#configuration)
-        * [Command line](#command-line)
-    * [Creating a bootable disk image](#creating-a-bootable-disk-image)
-        * [Requirements](#requirements-1)
-        * [Command line](#command-line-1)
-    * [Emulation and debugging](#emulation-and-debugging)
-        * [Requirements](#requirements-2)
-        * [Command line](#command-line-2)
-    * [Structure](#structure)
-    * [Coding style](#coding-style)
-    * [Roadmap](#roadmap)
-    * [License](#license)
+  * [Table of contents](#table-of-contents)
+  * [Documentation](#documentation)
+  * [Build environment](#build-environment)
+    * [Requirements](#requirements)
+    * [Configuration](#configuration)
+    * [Command line](#command-line)
+  * [Creating a bootable disk image](#creating-a-bootable-disk-image)
+    * [Requirements](#requirements-1)
+    * [Command line](#command-line-1)
+  * [Emulation and debugging](#emulation-and-debugging)
+    * [Requirements](#requirements-2)
+    * [Command line](#command-line-2)
+  * [Structure](#structure)
+  * [Coding style](#coding-style)
+  * [Roadmap](#roadmap)
+  * [License](#license)
 
 ## Documentation
 * Documentation and code is written in United States English for integration
   with other programs.
 * Shell commands to be run as user are denoted by shell code blocks.
-* 'sysroot' refers to the target installation directory.
 
 ## Build environment
 ### Requirements
@@ -50,7 +49,7 @@ Configurations:
 
     Target: PC with i386 architecture
 
-    sysroot: `./sysroot`
+    System root: `./sysroot`
 
     [Debugging from emulation script](#emulation-and-debugging) enabled.
 
@@ -63,7 +62,8 @@ Configurations:
 ```shell
 make
 ```
-Builds the kernel image and installs all system files to the configured sysroot.
+Builds the kernel image and installs all system files to the configured system
+root.
 
 ## Creating a bootable disk image
 ### Requirements
@@ -104,10 +104,10 @@ support is enabled.
   configuration will be added. Modules are configured to use
   architecture-specific objects with `arch/<arch>/<module>/build.mk`.
 * Headers accessible by all modules are located in `include` and will be copied
-  to the sysroot in the build process.
+  to the system root in the build process.
     * Architecture-specific headers are located in `arch/<arch>/include`; only
       headers specific to the configured target architecture will be accessible
-      from modules and copied to the sysroot.
+      from modules and copied to the system root.
 * `image` contains files for the creation of the bootable disk image.
 
 ## Coding style
