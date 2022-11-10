@@ -8,7 +8,9 @@
 
 include .local.mk
 ARCHDIR = arch/$(ARCH)
-CPPFLAGS += -Iinclude -I$(ARCHDIR)/include
+BOOTDIR = $(SYSROOT)/boot
+INCDIR = $(SYSROOT)/include
+CFLAGS += -Iinclude -I$(ARCHDIR)/include
 LDFLAGS += -L.
 
 include lib/build.mk
@@ -22,6 +24,7 @@ include kernel/build.mk
 include $(ARCHDIR)/kernel/build.mk
 kernel_GLOBAL_OBJECTS = $(kernel_OBJECTS:%=kernel/%)
 kernel_ARCH_OBJECTS = $(kernel_$(ARCH)_OBJECTS:%=$(ARCHDIR)/kernel/%)
+kernel_ALL_OBJECTS = $(kernel_GLOBAL_OBJECTS) $(kernel_ARCH_OBJECTS)
 kernel_ARCHIVES = $(kernel_LIBS:%=lib%.a)
 kernel_LINKERSCRIPT = $(ARCHDIR)/kernel/$(kernel_$(ARCH)_LINKERSCRIPT)
 kernel_OUT = $(SYSROOT)/boot/$(kernel_BIN)
@@ -35,31 +38,36 @@ kernel_ALL_LDFLAGS = $(LDFLAGS) $(kernel_LDFLAGS) $(kernel_AUX_LDFLAGS) \
 
 DEPENDENCIES += $(kernel_GLOBAL_OBJECTS:%.o=%.d) $(kernel_ARCH_OBJECTS:%.o=%.d)
 
-.PHONY: $(SYSROOT) all clean mrproper
+.PHONY: all clean mrproper $(BOOTDIR) $(INCDIR)
 
-all: $(SYSROOT) $(kernel_OUT)
+ifndef VERBOSE
+.SILENT: $(kernel_OUT) $(lib_ARCHIVE) $(kernel_ALL_OBJECTS) \
+		$(lib_GLOBAL_OBJECTS)
+endif
 
-$(SYSROOT):
-	mkdir -p $(SYSROOT)/{boot,include}
-	cp -R include/* $(ARCHDIR)/include/* $(SYSROOT)/include
+all: $(kernel_OUT) $(INCDIR)
 
-$(kernel_OUT): $(kernel_GLOBAL_OBJECTS) $(kernel_ARCH_OBJECTS) \
-		$(kernel_ARCHIVES)
+$(BOOTDIR):
+	mkdir -p $@
+
+$(INCDIR):
+	cp -R include/* $(ARCHDIR)/include/* $@
+
+$(kernel_OUT): $(kernel_ALL_OBJECTS) $(kernel_ARCHIVES) $(BOOTDIR)
 	@echo ' LD' $@
-	@$(LD) $(kernel_ALL_LDFLAGS) $(kernel_GLOBAL_OBJECTS) \
-		$(kernel_ARCH_OBJECTS) -o $@
+	$(LD) $(kernel_ALL_LDFLAGS) $(kernel_ALL_OBJECTS) -o $@
 
 $(lib_ARCHIVE): $(lib_GLOBAL_OBJECTS)
 	@echo ' AR' $@
-	@$(AR) $(lib_ARFLAGS) $@ $^
+	$(AR) $(lib_ARFLAGS) $@ $^
 
 .c.o:
 	@echo ' CC' $@
-	@$(CC) $($(@D:$(ARCHDIR)/%=%)_ALL_CFLAGS) \
+	$(CC) $($(@D:$(ARCHDIR)/%=%)_ALL_CFLAGS) \
 		$($(@D:$(ARCHDIR)/%=%_$(ARCH))_$(*F)_CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(kernel_GLOBAL_OBJECTS) $(kernel_ARCH_OBJECTS) $(lib_GLOBAL_OBJECTS)
+	rm -f $(kernel_ALL_OBJECTS) $(lib_GLOBAL_OBJECTS)
 
 mrproper: clean
 	rm -f $(kernel_OUT) $(lib_ARCHIVE) $(DEPENDENCIES)

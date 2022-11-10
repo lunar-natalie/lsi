@@ -13,12 +13,13 @@
 
 SCRIPT_BASENAME=$(basename "$0")
 
+unset ARCH
 unset CPPFLAGS
 unset LDFLAGS
+unset MACH
 unset QEMU_USE_GDB
 unset TARGET
-unset ARCH
-unset MACH
+unset VERBOSE
 AR="llvm-ar"
 CC="clang"
 CFLAGS="-O2 -MMD -g -std=c17"
@@ -38,7 +39,8 @@ LD
 LDFLAGS
 MACH
 SYSROOT
-TARGET"
+TARGET
+VERBOSE"
 
 SH_ENVNAMES="\
 DISK_IMAGE
@@ -75,6 +77,7 @@ Options:
       --ld=<value>          Specify linker executable
                               Default: $LD
       --ldflags=<string>    Specify global linker flags
+      --make-verbose        Enable verbose output from make(1)
       --qemu-gdb            Use the GNU debugger in the emulation script
       --sysroot=<directory> Specify the target system root
                               Default: $SYSROOT/
@@ -120,9 +123,9 @@ get_long_optarg() {
     eval $1="$VALUE"
 }
 
-# Echoes $1 to standard error if VERBOSE is set.
+# Echoes $1 to standard error if CONF_VERBOSE is set.
 log_verbose() {
-    if is_set VERBOSE
+    if is_set CONF_VERBOSE
     then
         echo "$1" >&2
     fi
@@ -170,6 +173,9 @@ do
                 "ldflags")
                     get_long_optarg LDFLAGS $@
                     ;;
+                "make-verbose")
+                    VERBOSE=1
+                    ;;
                 "qemu-gdb")
                     QEMU_USE_GDB=
                     ;;
@@ -183,7 +189,7 @@ do
                     help_function
                     ;;
                 "verbose")
-                    VERBOSE=
+                    CONF_VERBOSE=
                     ;;
                 ?)
                     err_invoc "unrecognized option '--$OPT'"
@@ -194,7 +200,7 @@ do
             help_function
             ;;
         "v")
-            VERBOSE=
+            CONF_VERBOSE=
             ;;
         ?)
             CMDLINE_OPT=$(eval echo "\$$((OPTIND-1))")
