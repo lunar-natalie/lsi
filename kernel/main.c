@@ -13,7 +13,7 @@
 #include <stdbool.h>
 
 // Kernel entry point.
-void __attribute__((noreturn)) kmain(void)
+__attribute__((noreturn)) void kmain(void)
 {
     terminal_init();
     terminal_clear();
