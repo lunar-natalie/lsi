@@ -8,11 +8,11 @@
  * SPDX-License-Identifier: GPL-3.0
  */
 
+#include <lsi/string.h>
 #include <lsi/tty.h>
 #include <video/vga.h>
 
 #include <stdbool.h>
-#include <string.h>
 
 // Attributes for displaying VGA text.
 static struct vga_text_attributes {
