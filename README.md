@@ -28,8 +28,8 @@ UNIX-like kernel.
 
 ## Build environment
 ### Requirements
-* `make` ([Public domain POSIX make](https://frippery.org/make) (pdpmake),
-  GNU make, or other POSIX-compliant make supporting the pdpmake extensions)
+* `make` ([Public domain POSIX make][www-pdpmake] (pdpmake), GNU make, or other
+  POSIX-compliant make supporting the pdpmake extensions)
 * `clang` (version 6 or later)
 * `cut`
 * `llvm`
@@ -88,9 +88,8 @@ Debugging:
 ```shell
 ./qemu.sh
 ```
-Emulates the created disk image in [QEMU](https://www.qemu.org/); starts
-[GDB](https://sourceware.org/gdb/) and connects the process to QEMU if debugging
-support is enabled.
+Emulates the created disk image in [QEMU][www-qemu]; starts [GDB][www-gdb] and
+connects the process to QEMU if debugging support is enabled.
 
 ## Structure
 * Each module is built by the root `Makefile` and contains a `build.mk` included
@@ -125,8 +124,7 @@ support is enabled.
   SPDX-License-Identifier: <identifier>
   ```
 * Code should fit the conditions specified in `.editorconfig` and
-  `.clang-format` (see the
-  [ClangFormat documentation](https://clang.llvm.org/docs/ClangFormat.html) for
+  `.clang-format` (see the [ClangFormat documentation][www-clang-format] for
   more information).
 
 ## Roadmap
@@ -136,7 +134,7 @@ focus of the kernel is to implement only the fundamental features to work
 towards a funtional userspace with I/O on x86.
 
 Feature checklist for current stage:
-* [x] [Multiboot2](https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html)
+* [x] [Multiboot2][www-multiboot2]
   compliant, bootable from GRUB
 * [x] Basic VGA text mode console handler
 * [ ] Higher half mapping
@@ -162,3 +160,10 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 Written by Natalie Wiggins.
 
 See `LICENSE` and `AUTHORS` for more information.
+
+
+[www-pdpmake]: https://frippery.org/make
+[www-qemu]: https://www.qemu.org/
+[www-gdb]: https://sourceware.org/gdb/
+[www-clang-format]: https://clang.llvm.org/docs/ClangFormat.html
+[www-multiboot2]: https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html
