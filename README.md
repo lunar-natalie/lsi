@@ -132,7 +132,16 @@ support is enabled.
 ## Roadmap
 The long term goal of the LSI kernel is to provide the most common UNIX-like
 interfaces and syscalls to support an external libc. In the short term, the
-focus of the kernel is to implement basic I/O functionality on x86.
+focus of the kernel is to implement only the fundamental features to work
+towards a funtional userspace with I/O on x86.
+
+Feature checklist for current stage:
+* [x] [Multiboot2](https://www.gnu.org/software/grub/manual/multiboot2/multiboot.html)
+  compliant, bootable from GRUB
+* [x] Basic VGA text mode console handler
+* [ ] Higher half mapping
+* [ ] Keyboard handler
+  * [ ] IRQ interface
 
 ## License
 Copyright (c) 2022 The LSI Authors.
