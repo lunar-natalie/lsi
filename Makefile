@@ -51,6 +51,7 @@ $(BOOTDIR):
 	mkdir -p $@
 
 $(INCDIR):
+	mkdir -p $@
 	cp -R include/* $(ARCHDIR)/include/* $@
 
 $(kernel_OUT): $(kernel_ALL_OBJECTS) $(kernel_ARCHIVES) $(BOOTDIR)
