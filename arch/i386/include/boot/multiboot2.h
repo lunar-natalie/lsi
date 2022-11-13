@@ -25,8 +25,8 @@
  * IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _BOOT_I386_MULTIBOOT2_H
-#define _BOOT_I386_MULTIBOOT2_H
+#ifndef _BOOT_I386_MULTIBOOT2_H_
+#define _BOOT_I386_MULTIBOOT2_H_
 
 // How many bytes from the start of the file we search for the header.
 #define MULTIBOOT_SEARCH 32768
@@ -383,4 +383,4 @@ struct multiboot_tag_load_base_addr {
 
 #endif // ASM_FILE
 
-#endif // _BOOT_I386_MULTIBOOT2_H
+#endif // _BOOT_I386_MULTIBOOT2_H_

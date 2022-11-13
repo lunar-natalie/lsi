@@ -8,8 +8,8 @@
  * SPDX-License-Identifier: GPL-3.0
  */
 
-#ifndef _VIDEO_VGA_H
-#define _VIDEO_VGA_H
+#ifndef _VIDEO_VGA_H_
+#define _VIDEO_VGA_H_
 
 #include <stddef.h>
 #include <stdint.h>
@@ -62,4 +62,4 @@ static inline vga_entry get_vga_index(size_t row, size_t col, size_t width)
     return (row * width) + col;
 }
 
-#endif // _VIDEO_VGA_H
+#endif // _VIDEO_VGA_H_

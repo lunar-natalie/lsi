@@ -11,7 +11,8 @@ kernel_i386_CPPFLAGS =
 kernel_i386_LDFLAGS =
 
 kernel_i386_OBJECTS = \
-boot.o
+boot/multiboot.o \
+boot/start.o
 
 kernel_i386_boot_CFLAGS = -O0 -fomit-frame-pointer
 

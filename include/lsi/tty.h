@@ -8,8 +8,8 @@
  * SPDX-License-Identifier: GPL-3.0
  */
 
-#ifndef _LSI_TTY_H
-#define _LSI_TTY_H
+#ifndef _LSI_TTY_H_
+#define _LSI_TTY_H_
 
 #include <stddef.h>
 
@@ -29,4 +29,4 @@ void terminal_putchar(unsigned char c);
 // Writes a string to the terminal and updates the terminal position.
 void terminal_write(const char *s);
 
-#endif // _LSI_TTY_H
+#endif // _LSI_TTY_H_

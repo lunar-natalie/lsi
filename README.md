@@ -28,8 +28,7 @@ UNIX-like kernel.
 
 ## Build environment
 ### Requirements
-* `make` ([Public domain POSIX make][www-pdpmake] (pdpmake), GNU make, or other
-  POSIX-compliant make supporting the pdpmake extensions)
+* `make` (GNU)
 * `clang` (version 6 or later)
 * `cut`
 * `llvm`
@@ -162,7 +161,6 @@ Written by Natalie Wiggins.
 See `LICENSE` and `AUTHORS` for more information.
 
 
-[www-pdpmake]: https://frippery.org/make
 [www-qemu]: https://www.qemu.org/
 [www-gdb]: https://sourceware.org/gdb/
 [www-clang-format]: https://clang.llvm.org/docs/ClangFormat.html
